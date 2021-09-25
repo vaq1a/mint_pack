@@ -116,6 +116,10 @@
             justify-content: space-between;
             width: 100%;
             margin-bottom: 18px;
+
+            max-width: 1078px;
+            position: fixed;
+            top: 20px;
         }
 
         .sticky__empty {
@@ -185,9 +189,9 @@
             max-width: 177px;
         }
 
-        .button_w260 {
+        .button_w261 {
             padding: 22px;
-            max-width: 260px;
+            max-width: 261px;
         }
 
         /*form*/
@@ -197,8 +201,7 @@
         }
 
         .form.form-position {
-            position: relative;
-            left: 36px;
+            margin-left: 56.587px;
         }
 
         .form__input {
@@ -213,6 +216,7 @@
             box-sizing: border-box;
             max-width: 143px;
             height: 50px;
+            padding: 1.5px;
             margin-left: 9px;
             margin-right: 9px;
         }
@@ -316,7 +320,7 @@
             }
 
             .form.form-position {
-                left: 0;
+                margin-left: 0;
             }
 
             /*button*/
@@ -325,6 +329,12 @@
                 width: auto;
                 margin-top: 9px;
                 margin-right: 22px;
+            }
+
+
+            /*sticky*/
+            .sticky {
+                position: static;
             }
 
             .button_sticky {
@@ -370,28 +380,27 @@
                     </button>
                 </div>
 
-
                 <div class="form form-position">
-                    <button class="button button_h50 button_w50">
+                    <button class="button button_h50 button_w50 minus">
                         <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H12V2H0V0Z" fill="white"/>
                         </svg>
                     </button>
-                    <input class="form__input" type="number" value="5">
-                    <button class="button button_h50 button_w50">
+                    <input class="form__input" type="number" value="1" min="1">
+                    <button class="button button_h50 button_w50 plus">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" width="2" height="12" fill="white"/>
                             <rect y="5" width="12" height="2" fill="white"/>
                         </svg>
                     </button>
-                    <button class="button-text button_upper-case">max</button>
+                    <button class="button-text button_upper-case max">max</button>
                 </div>
 
                 <div class="subtext subtext__indent">
                     Total: <span class="subtext_isolated">0,09 ETH</span> + gas fee
                 </div>
 
-                <button class="button button_h60 button_w260 button_upper-case">
+                <button class="button button_h60 button_w261 button_upper-case">
                     MINT PACK
                 </button>
 
@@ -438,7 +447,10 @@
         window.addEventListener("load", () => {
             let buttonSticky = document.querySelector('.button_sticky'),
                 buttonStickyOffsetTop = offset(buttonSticky),
-                mobileDetect = window.innerWidth <= 768;
+                mobileDetect = window.innerWidth <= 768,
+                countInput = document.querySelector('.form__input');
+
+            const MAX_VALUE = 100;
 
             //support function
             function offset(el) {
@@ -458,6 +470,23 @@
                     }
                 });
             }
+
+            //form
+            document.querySelector('.minus').addEventListener('click', () => {
+                if(!!parseInt(countInput.value) && parseInt(countInput.value) - 1 !== 0) {
+                    countInput.value = parseInt(countInput.value) - 1;
+                }
+            });
+
+            document.querySelector('.plus').addEventListener('click', () => {
+                if(!!parseInt(countInput.value)) {
+                    countInput.value = parseInt(countInput.value) + 1;
+                }
+            });
+
+            document.querySelector('.max').addEventListener('click', () => {
+                countInput.value = MAX_VALUE;
+            });
         });
     </script>
 </body>
