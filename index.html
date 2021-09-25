@@ -215,10 +215,17 @@
             text-align: center;
             box-sizing: border-box;
             max-width: 143px;
+            min-width: 143px;
             height: 50px;
             padding: 1.5px;
-            margin-left: 9px;
+        }
+
+        .minus {
             margin-right: 9px;
+        }
+
+        .plus {
+            margin-left: 9px;
         }
 
         /*subtext*/
@@ -386,7 +393,7 @@
                             <path d="M0 0H12V2H0V0Z" fill="white"/>
                         </svg>
                     </button>
-                    <input class="form__input" type="number" value="1" min="1">
+                    <input class="form__input" type="number" value="0" min="0">
                     <button class="button button_h50 button_w50 plus">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" width="2" height="12" fill="white"/>
@@ -472,14 +479,16 @@
             }
 
             //form
+            countInput.max = MAX_VALUE;
+
             document.querySelector('.minus').addEventListener('click', () => {
-                if(!!parseInt(countInput.value) && parseInt(countInput.value) - 1 !== 0) {
+                if(parseInt(countInput.value) >= 0 && parseInt(countInput.value) - 1 !== -1) {
                     countInput.value = parseInt(countInput.value) - 1;
                 }
             });
 
             document.querySelector('.plus').addEventListener('click', () => {
-                if(!!parseInt(countInput.value)) {
+                if(parseInt(countInput.value) >= 0) {
                     countInput.value = parseInt(countInput.value) + 1;
                 }
             });
